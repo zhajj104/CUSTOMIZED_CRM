@@ -4,7 +4,7 @@
     'sequence': 1,
     'category': 'CRM-ODOO应用',
     'summary': """CUSTOMIZED-CRM""",
-    'description': """CUSTOMIZED-CRM""",
+    'description': """本模块将自定义一个CRM应用用来适配国内人员，包含客户、联系人、Pipeline和产品等四个模块""",
     'author': "zhajj",
     'website': "http://www.yourcompany.com",
     # for the full list
@@ -33,4 +33,5 @@
     #     'demo/demo.xml',
     # ],
     'application': True,
+    'license': 'LGPL-3',
 }
