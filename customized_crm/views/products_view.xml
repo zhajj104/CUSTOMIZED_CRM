@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="products_tree" model="ir.ui.view">
+            <field name="name">产品</field>
+            <field name="model">crm.products</field>
+            <field name="arch" type="xml">
+                <tree limit="20" default_order="last_modified_time desc">
+                    <field name="product_name" string="产品名称"/>
+                    <field name="product_attribution_system_id" string="产品归属系统" optional="show"/>
+                    <field name="headquarters" string="本部" optional="show"/>
+                    <field name="bu" string="事业部" optional="show"/>
+                    <field name="brand" string="品牌" optional="show"/>
+                    <field name="category_id" string="分类" optional="show"/>
+                    <field name="product_description" string="产品概述" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="products_search" model="ir.ui.view">
+            <field name="name">产品</field>
+            <field name="model">crm.products</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="product_name" string="产品名称"/>
+                    <field name="headquarters" string="本部"/>
+                    <field name="bu" string="事业部"/>
+                    <field name="brand" string="品牌"/>
+                    <field name="category_id" string="分类"/>
+                    <field name="product_description" string="产品概述"/>
+                    <field name="remark" string="备注"/>
+                    <field name="cloud_native" string="云原生"/>
+                    <field name="digital_native" string="数字原生"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="products_form" model="ir.ui.view">
+            <field name="name">产品</field>
+            <field name="model">crm.products</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field invisible="1" name="id" data-actionState="m-noSave"/>
+
+                    <sheet>
+                        <notebook>
+                            <page string="详细信息">
+                                <div class="o_horizontal_separator">基本信息</div>
+                                <group>
+                                    <group>
+                                        <field name="product_attribution_system_id" string="产品归属系统"/>
+                                        <field name="headquarters" string="本部"/>
+                                        <field name="brand" string="品牌"/>
+                                        <field name="is_third_party_outsource" string="是否第三方外购"/>
+                                        <field name="approver_phone" string="审批人手机"/>
+                                        <field name="remark" string="备注"/>
+                                    </group>
+                                    <group>
+                                        <field name="product_name" string="产品名称"/>
+                                        <field name="bu" string="事业部"/>
+                                        <field name="category_id" string="分类"/>
+                                        <field name="product_description" string="产品概述"/>
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">激励比例</div>
+                                <group>
+                                    <group>
+                                        <field name="sales_department_profit" string="销售部门利润(%)"/>
+                                    </group>
+                                    <group>
+                                        <field name="general_channel_sellers_award" string="普通渠道销售员奖励(%)"/>
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">系统信息</div>
+                                <group>
+                                    <group>
+                                        <field name="product_status_id" string="上下架"/>
+                                        <field name="product_no" string="产品编号"/>
+                                        <field name="record_type" string="业务类型"/>
+                                        <field name="on_shelves_time" string="上架时间" widget="date"/>
+                                        <field name="created_by_id" string="创建人"/>
+                                        <field name="last_modified_by_id" string="最后修改人"/>
+                                        <field name="lock_status" string="锁定状态"/>
+                                    </group>
+                                    <group>
+                                        <field name="order_field" string="排序"/>
+                                        <field name="price" string="标准价格"/>
+                                        <field name="owner_id" string="负责人"/>
+                                        <field name="off_shelves_time" string="下架时间" widget="date"/>
+                                        <field name="create_time" string="创建时间"/>
+                                        <field name="last_modified_time" string="最后修改时间"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="商机明细" attrs="{'invisible':[('id','=',False)]}">
+                                <fieldset>
+                                    <legend>商机明细</legend>
+                                    <field name="product_detail_ids" mode="tree">
+                                        <tree>
+                                            <field name="name" string="商机明细编码"/>
+                                            <field name="product_detail_id" string="产品线名称" optional="show"></field>
+                                            <field name="expected_sale_amount" string="预计落单金额（元）"
+                                                   optional="show"></field>
+                                            <field name="product_line_cadres" string="产品线本部" optional="show"></field>
+                                            <field name="product_line_division" string="产品线事业部" optional="show"></field>
+                                            <field name="third_party_outsource" string="是否第三方外购"
+                                                   optional="show"></field>
+                                            <field name="business_detail_id" string="商机" optional="show"></field>
+                                            <field name="group_product" string="集团产品" optional="show"></field>
+                                            <field name="group_product" string="折扣(%)" optional="show"></field>
+                                            <field name="owner_department" string="负责人所在部门" optional="hide"/>
+                                            <field name="record_type" string="业务类型" optional="hide"></field>
+                                            <field name="principal_id" string="负责人" optional="hide"></field>
+                                            <field name="remark" string="备注" optional="hide"></field>
+                                            <field name="creator_id" string="创建人" optional="hide"></field>
+                                            <field name="last_modifier_id" string="最后修改人" optional="hide"></field>
+                                            <field name="created_time" string="创建时间" optional="hide"></field>
+                                            <field name="last_modified_time" string="最后修改时间" optional="hide"></field>
+                                            <field name="quantity" string="数量" optional="hide"></field>
+                                            <field name="sale_price" string="销售单价" help="销售单价（元）"
+                                                   optional="hide"></field>
+                                        </tree>
+                                    </field>
+                                </fieldset>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

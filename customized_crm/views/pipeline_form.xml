@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="pipeline_form" model="ir.ui.view">
+            <field name="name">pipeline</field>
+            <field name="model">crm.pipeline</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="process_group" invisible="1"/>
+                    <field name="active" invisible="1"/>
+                    <field invisible="1" name="id" data-actionState="m-noSave"/>
+                    <header>
+                        <button name="pipeline_invalid" string="pipeline作废" type="object" class="btn-primary"
+                                attrs="{'invisible': ['|', ('active', '!=', True),('id','=',False)]}"/>
+                        <button name="pipeline_recover" string="恢复" type="object" class="btn-primary"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"
+                               domain="[('business_process_id', 'in', [1,process_group])]"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label class="oe_edit_only" for="business_name" string="商机名称"/>
+                            <h1>
+                                <field name="business_name" string="商机名称" required="1" placeholder="商机名称"/>
+                            </h1>
+                        </div>
+                        <group class="so_base">
+                            <group>
+                                <field name="business_source_id" string="商机来源"/>
+                                <field name="business_process_id" string="商机流程"
+                                       options="{'no_create': True, 'no_create_edit': True}"
+                                       domain="[('process_group', '!=' , False)]"/>
+                                <field name="amount" string="商机金额(元)"/>
+                            </group>
+                            <group>
+                                <field name="principal_id" string="负责人"/>
+                                <field name="expected_sign_date" string="预计签约日期" widget="date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="详细信息">
+                                <div class="o_horizontal_separator">商机出现</div>
+                                <group>
+                                    <group>
+                                        <field name="business_type" string="商机类型"/>
+                                        <field name="enduser_name_id" string="最终用户名称"/>
+                                        <field name="first_industry_id" string="用户一级行业"/>
+                                    </group>
+                                    <group>
+                                        <field name="business_area" string="商机区域"/>
+                                        <field name="agent_name_id" string="代理商名称"/>
+                                        <field name="second_industry_id" string="用户二级行业"
+                                               domain="[('parent_id', '=', first_industry_id)]"/>
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">方案及交流</div>
+                                <group>
+                                    <group>
+                                        <field name="requirements_doc" string="需求文档" style="width: 200px"/>
+                                        <field name="pre_saling_support" string="售前支持"/>
+                                    </group>
+                                    <group>
+                                        <field name="solution_doc" string="方案文档" style="width: 200px"/>
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">招投标及报价</div>
+                                <group>
+                                    <group>
+                                        <field name="project_purchase_form_id" string="项目采购形式"/>
+                                    </group>
+                                    <group>
+                                        <field name="competitor" string="竞争对手"/>
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">中标及商务</div>
+                                <group>
+                                    <group>
+                                        <field name="payment_mode_id" string="客户付款方式"/>
+                                        <field name="expected_profit_rate" string="预计利润率(%)"/>
+                                        <field name="expected_delivery_date" string="预计交货日期" widget="date"/>
+                                    </group>
+                                    <group>
+                                        <field name="payment_terms" string="客户付款条款"/>
+                                        <field name="expected_profit" string="预计利润金额"/>
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">关单管理</div>
+                                <group>
+                                    <group>
+                                        <field name="success_summary" string="赢单总结"/>
+                                        <field name="suspend_type_id" string="中止类型"/>
+                                        <field name="distribute_failed_reason_id" string="分销输单原因"/>
+                                    </group>
+                                    <group>
+                                        <field name="expected_income_date" string="预计确认收入时间" widget="date"/>
+                                        <field name="suspend_explain" string="中止说明"/>
+                                        <field name="closed_order_time" string="关单时间"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="商机明细">
+                                <fieldset>
+                                    <legend>预设业务类型</legend>
+                                    <field name="business_detail_ids" mode="tree">
+                                        <tree>
+                                            <field name="name" string="商机明细编码"></field>
+                                            <field name="product_detail_id" string="产品线名称" optional="show"></field>
+                                            <field name="expected_sale_amount" string="预计落单金额（元）"
+                                                   optional="show"></field>
+                                            <field name="product_line_cadres" string="产品线本部" optional="show"></field>
+                                            <field name="product_line_division" string="产品线事业部" optional="show"></field>
+                                            <field name="third_party_outsource" string="是否第三方外购"
+                                                   optional="show"></field>
+                                            <field name="business_detail_id" string="商机" optional="show"></field>
+                                            <field name="group_product" string="集团产品" optional="show"></field>
+                                            <field name="record_type" string="业务类型" optional="show"></field>
+                                            <field name="principal_id" string="负责人" optional="show"></field>
+                                            <field name="remark" string="备注" optional="show"></field>
+                                            <field name="creator_id" string="创建人" optional="show"></field>
+                                            <field name="last_modifier_id" string="最后修改人" optional="show"></field>
+                                            <field name="created_time" string="创建时间" optional="show"></field>
+                                            <field name="last_modified_time" string="最后修改时间" optional="show"></field>
+                                            <field name="quantity" string="数量" optional="show"></field>
+                                            <field name="sale_price" string="销售单价" help="销售单价（元）"
+                                                   optional="show"></field>
+                                        </tree>
+                                    </field>
+                                </fieldset>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

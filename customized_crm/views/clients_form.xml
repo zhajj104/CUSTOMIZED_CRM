@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="clients_form" model="ir.ui.view">
+            <field name="name">clients</field>
+            <field name="model">crm.clients</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field invisible="1" name="id" data-actionState="m-noSave"/>
+                    <field invisible="1" name="province_id" data-actionState="m-noSave"/>
+                    <field invisible="1" name="country_id" data-actionState="m-noSave"/>
+                    <field invisible="1" name="city_id" data-actionState="m-noSave"/>
+
+                    <sheet>
+                        <notebook>
+                            <page string="详细信息">
+                                <div class="o_horizontal_separator">基本信息</div>
+                                <group>
+                                    <group>
+                                        <field name="client_name" string="客户名称" placeholder="请输入"/>
+                                        <field name="client_level_id" string="客户级别" widget="selection"
+                                               placeholder="请先选择客户类型"
+                                               domain="[('parent_id', '=', client_type_id)]"/>
+                                        <field name="secondary_classification_id" string="行业二级分类"
+                                               placeholder="请先选择行业一级分类"
+                                               widget="selection"
+                                               domain="[('parent_id', '=', industry_classification_id)]"/>
+                                        <field name="related_core_channel" string="关联核心渠道" placeholder="请选择"/>
+                                        <field name="client_manager_id" string="客户经理"/>
+                                        <field name="group_leader_id" string="组长"/>
+                                        <field name="telephone" string="电话"/>
+                                    </group>
+                                    <group>
+                                        <field name="client_type_id" string="客户类型" widget="selection"
+                                               placeholder="请选择"/>
+                                        <field name="industry_classification_id" string="行业一级分类" placeholder="请选择"
+                                               widget="selection"/>
+                                        <field name="channel_type_id" string="渠道类型" widget="selection"/>
+                                        <field name="union_channel_id" string="联盟渠道" widget="selection"/>
+                                        <field name="business_manager_id" string="商务经理"/>
+                                        <field name="erp_client_number" string="ERP客户编号" placeholder="请输入"/>
+                                        <field name="crm_number" string="CRM编号"/>
+
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">地区定位</div>
+                                <group>
+                                    <group>
+                                        <field name="country" string="国家"/>
+<!--                                        widget="selection" domain="[('parent_id', '=', False),('district_type', '=','0')]"/>-->
+                                        <field name="city" string="市"/>
+<!--                                        widget="selection" domain="[('parent_id', '=', province),('district_type', '=','2')]"/>-->
+                                        <field name="address" string="详细地址"/>
+                                    </group>
+                                    <group>
+                                        <field name="province" string="省"/>
+<!--                                        widget="selection" domain="[('parent_id', '=', country),('district_type', '=','1')]"/>-->
+                                        <field name="district" string="区"/>
+<!--                                        widget="selection" domain="[('parent_id', '=', city),('district_type', '=','3')]"/>-->
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">工商信息</div>
+                                <group>
+                                    <group>
+                                        <field name="unified_social_credit_code" string="统一社会信用代码"/>
+                                        <field name="legal_representative" string="法定代表人"/>
+                                        <field name="registered_capital" string="注册资本"/>
+                                        <field name="company_type" string="公司类型"/>
+                                        <field name="registration_authority" string="登记机关"/>
+                                        <field name="business_scope" string="经营范围"/>
+                                    </group>
+                                    <group>
+                                        <field name="registration_status" string="登记状态"/>
+                                        <field name="registered_address" string="注册地址"/>
+                                        <field name="establishment_date" string="成立日期" widget="date"/>
+                                        <field name="registration_number" string="注册号"/>
+                                        <field name="approved_date" string="核准日期" widget="date"/>
+                                        <field name="enterprise_qualification_annex" string="企业资质附件"/>
+                                    </group>
+                                </group>
+                                <div class="o_horizontal_separator">组织信息</div>
+                                <group>
+                                    <group>
+                                        <field name="staff_structure_diagram" string="人员架构图"/>
+                                        <field name="agent_operating_brand" string="代理商经营品牌" placeholder="请输入"/>
+                                        <field name="acting_cooperative_brand" string="代理合作品牌" placeholder="请输入"/>
+                                        <field name="sellers_number" string="销售人员数量" placeholder="请输入"/>
+                                        <field name="covering_client_industry_id" string="覆盖客户所属行业" widget="selection"
+                                               placeholder="请选择"/>
+                                        <field name="client_owned_solution" string="客户自有解决方案" placeholder="请输入"/>
+                                        <field name="software_development_ability" string="软件开发能力" widget="selection"
+                                               placeholder="请选择"/>
+                                    </group>
+                                    <group>
+                                        <field name="organization_chart" string="组织架构图"/>
+                                        <field name="agent_top3_client_name" string="代理top3客户名称" placeholder="请输入"/>
+                                        <field name="technicians_number" string="技术人员数量" placeholder="请输入"/>
+                                        <field name="agent_type_id" string="代理类型" widget="selection" placeholder="请选择"/>
+                                        <field name="technology_and_qualification_certificate" string="技术和资质证书"
+                                               placeholder="请输入"/>
+                                        <field name="cloud_service_capabilities" string="云服务能力" widget="selection"
+                                               placeholder="请选择"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Pipeline" attrs="{'invisible':[('id','=',False)]}">
+                                <fieldset>
+                                    <legend>Pipeline</legend>
+                                    <field name="pipeline_ids" mode="tree">
+                                        <tree>
+                                            <field name="business_name" optional="show"/>
+                                            <field name="principal_id" optional="show" string="负责人"/>
+                                            <field name="amount" optional="show"/>
+                                            <field name="expected_sign_date" widget="date" optional="show"/>
+                                            <field name="created_time" optional="show"/>
+                                            <field name="stage_id" optional="show" string="商机阶段"/>
+                                            <field name="enduser_name_id" optional="show" string="最终用户名称"/>
+                                            <field name="agent_name_id" optional="show" string="代理商名称"/>
+                                        </tree>
+                                    </field>
+                                </fieldset>
+                            </page>
+                            <page string="联系人" attrs="{'invisible':[('id','=',False)]}">
+                                <fieldset>
+                                    <legend>联系人</legend>
+                                    <field name="contacts_ids" mode="tree">
+                                        <tree>
+                                            <field name="name" optional="show"/>
+                                            <field name="department" optional="show"/>
+                                            <field name="position" optional="show"/>
+                                            <field name="sex" optional="show"/>
+                                            <field name="birthday" optional="show" widget="date"/>
+                                            <field name="customer_name_id" optional="show"/>
+                                            <field name="business_card" optional="show"/>
+                                            <field name="phone" optional="show"/>
+                                            <field name="telephone" optional="show"/>
+                                            <field name="mail" optional="show"/>
+                                            <field name="address" optional="show"/>
+                                            <field name="business_type" optional="show"/>
+                                            <field name="nation" optional="hide"/>
+                                            <field name="hometown" optional="hide"/>
+                                            <field name="graduated_school" optional="hide"/>
+                                            <field name="resume" optional="hide"/>
+                                            <field name="hobby" optional="hide"/>
+                                            <field name="living_habit" optional="hide"/>
+                                            <field name="key_relatives" optional="hide"/>
+                                            <field name="social_relationship" optional="hide"/>
+                                            <field name="experience" optional="hide"/>
+                                        </tree>
+                                    </field>
+                                </fieldset>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

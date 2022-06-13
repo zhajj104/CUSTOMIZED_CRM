@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="contacts_form" model="ir.ui.view">
+            <field name="name">联系人</field>
+            <field name="model">crm.contacts</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field invisible="1" name="id" data-actionState="m-noSave"/>
+                    <sheet>
+                        <div class="oe_read_only">
+                            <label for="position" style="width:50px"/>
+                            <field name="position" style="width:100px"/>
+                            <label for="principal_id" string="负责人" style="width: 50px"/>
+                            <field name="principal_id" style="width: 200px"/>
+                            <label for="department" style="width:50px"/>
+                            <field name="department" style="width:100px"/>
+                        </div>
+                        <notebook>
+                            <page string="详细信息">
+                                <group string="基本信息">
+                                    <group>
+                                        <field name="customer_name_id" string="客户名称" placeholder="请输入"
+                                               options="{'no_create_edit': True}"></field>
+                                        <field name="sex" string="性别" required="1" placeholder="请选择"></field>
+                                        <field name="position" string="职务" required="1" placeholder="请输入"></field>
+                                        <field name="telephone" string="电话" required="1" placeholder="请输入"></field>
+                                        <field name="address" string="地址" placeholder="请输入"></field>
+                                    </group>
+                                    <group>
+                                        <field name="name" string="姓名" required="1" placeholder="请输入"></field>
+                                        <field name="department" string="部门" required="1" placeholder="请输入"></field>
+                                        <field name="phone" string="手机" required="1" placeholder="请输入"></field>
+                                        <field name="mail" string="邮箱" required="1" placeholder="请输入"></field>
+                                        <label for="business_card" string="名片"></label>
+                                        <div>
+                                            <field name="business_card" string="上传图片" widget="many2many_binary"></field>
+                                        </div>
+                                    </group>
+                                </group>
+                                <group string="个人情况">
+                                    <group>
+                                        <field name="age" string="年龄" placeholder="请输入"></field>
+                                        <field name="nation" string="民族" placeholder="请输入"></field>
+                                        <field name="graduated_school" string="毕业院校" placeholder="请输入"></field>
+                                    </group>
+                                    <group>
+                                        <field name="birthday_year" string="生日-年" invisible="1"></field>
+                                        <field name="birthday_month" string="生日-月" invisible="1"></field>
+                                        <field name="birthday_day" string="生日-日" invisible="1"></field>
+                                        <field name="birthday" string="生日" placeholder="请输入" widget="date"></field>
+                                        <field name="hometown" string="籍贯" placeholder="请输入"></field>
+                                        <field name="hobby" string="个人爱好" placeholder="请输入"></field>
+                                        <field name="living_habit" string="生活习惯" placeholder="请输入"></field>
+                                    </group>
+                                </group>
+                                <group string="家庭关系">
+                                    <group>
+                                        <field name="family_situation" string="家庭情况" placeholder="请输入"></field>
+                                    </group>
+                                    <group>
+                                        <field name="key_relatives" string="其他关键亲属" placeholder="请输入"></field>
+                                    </group>
+                                </group>
+                                <group string="社会关系">
+                                    <group>
+                                        <field name="social_relationship" string="社会关系" placeholder="请输入"></field>
+                                    </group>
+                                </group>
+                                <group string="工作情况">
+                                    <group>
+                                        <field name="experience" string="工作经历" placeholder="请输入"></field>
+                                    </group>
+                                    <group>
+                                        <field name="position_situation" string="岗位情况" placeholder="请输入"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

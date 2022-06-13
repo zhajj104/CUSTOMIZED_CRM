@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="dc_crm_business_detail_tree" model="ir.ui.view">
+            <field name="name">商机明细</field>
+            <field name="model">crm.business.detail</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" string="商机明细编码"/>
+                    <field name="product_detail_id" string="产品线名称" optional="show"/>
+                    <field name="expected_sale_amount" string="预计落单金额（元）" optional="show"/>
+                    <field name="product_line_cadres" string="产品线本部" optional="show"/>
+                    <field name="product_line_division" string="产品线事业部" optional="show"/>
+                    <field name="third_party_outsource" string="是否第三方外购" optional="show"/>
+                    <field name="business_detail_id" string="商机" optional="show"/>
+                    <field name="group_product" string="集团产品" optional="show"/>
+                    <field name="record_type" string="业务类型" optional="show"/>
+                    <field name="principal_id" string="负责人" optional="show"/>
+                    <field name="remark" string="备注" optional="show"/>
+                    <field name="creator_id" string="创建人" optional="show"/>
+                    <field name="last_modifier_id" string="最后修改人" optional="show"/>
+                    <field name="created_time" string="创建时间" optional="show"/>
+                    <field name="last_modified_time" string="最后修改时间" optional="show"/>
+                    <field name="quantity" string="数量" optional="show"/>
+                    <field name="sale_price" string="销售单价" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="dc_crm_business_detail_search" model="ir.ui.view">
+            <field name="name">商机明细</field>
+            <field name="model">crm.business.detail</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" string="商机明细编码"/>
+                    <field name="product_detail_id" string="产品线名称"/>
+                    <field name="product_line_cadres" string="产品线本部"/>
+                    <field name="product_line_division" string="产品线事业部"/>
+                    <field name="third_party_outsource" string="是否第三方外购"/>
+                    <field name="business_detail_id" string="商机"/>
+                    <field name="group_product" string="集团产品"/>
+                    <field name="record_type" string="业务类型"/>
+                    <field name="remark" string="备注"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="dc_crm_business_detail_form" model="ir.ui.view">
+            <field name="name">商机明细</field>
+            <field name="model">crm.business.detail</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_read_only">
+                            <label for="principal_id" string="负责人" style="width: 50px"/>
+                            <field name="principal_id" string="负责人" style="width: 200px"/>
+                            <label for="last_modified_time" string="最后修改时间" style="width:100px"/>
+                            <field name="last_modified_time" string="最后修改时间" style="width: 200px"/>
+                            <label for="record_type" string="业务类型" style="width: 100px"/>
+                            <field name="record_type" string="业务类型" style="width: 200px"/>
+                        </div>
+                        <notebook>
+                            <page string="详细信息">
+                                <group string="基本信息">
+                                    <group>
+                                        <field name="product_detail_id" string="产品线名称"></field>
+                                        <field name="product_line_cadres" string="产品线本部"></field>
+                                        <field name="third_party_outsource" string="是否第三方外购"></field>
+                                        <field name="group_product" string="集团产品"></field>
+                                    </group>
+                                    <group>
+                                        <field name="expected_sale_amount" string="预计落单金额（元）" help="小计"></field>
+                                        <field name="product_line_division" string="产品线事业部"></field>
+                                        <field name="business_detail_id" string="商机"></field>
+                                    </group>
+                                </group>
+                                <group string="系统信息">
+                                    <group>
+                                        <field name="record_type" string="业务类型"></field>
+                                        <label for="principal_id" string="负责人" class="oe_read_only"></label>
+                                        <div class="oe_read_only">
+                                            <field name="principal_id"></field>
+                                        </div>
+                                        <label for="creator_id" string="创建人" class="oe_read_only"></label>
+                                        <div class="oe_read_only">
+                                            <field name="creator_id"></field>
+                                        </div>
+                                        <label for="created_time" string="创建时间" class="oe_read_only"></label>
+                                        <div class="oe_read_only">
+                                            <field name="created_time"></field>
+                                        </div>
+                                        <field name="quantity" string="数量"></field>
+                                    </group>
+                                    <group>
+                                        <field name="name" string="商机明细编码"></field>
+                                        <field name="remark" string="备注"></field>
+                                        <label for="last_modifier_id" string="最后修改人" class="oe_read_only"></label>
+                                        <div class="oe_read_only">
+                                            <field name="last_modifier_id"></field>
+                                        </div>
+                                        <label for="last_modified_time" string="最后修改时间" class="oe_read_only"></label>
+                                        <div class="oe_read_only">
+                                            <field name="last_modified_time" string="最后修改时间"></field>
+                                        </div>
+                                        <field name="sale_price" string="销售单价" help="销售单价（元）"></field>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

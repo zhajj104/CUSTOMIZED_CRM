@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="pipeline_action" model="ir.actions.act_window">
+            <field name="name">Pipeline</field>
+            <field name="res_model">crm.pipeline</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="customized_crm.pipeline_tree"></field>
+            <field name="search_view_id" ref="customized_crm.pipeline_search"></field>
+        </record>
+
+        <record id="contacts_action" model="ir.actions.act_window">
+            <field name="name">联系人</field>
+            <field name="res_model">crm.contacts</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="customized_crm.contacts_tree"></field>
+            <field name="search_view_id" ref="customized_crm.contacts_search"></field>
+        </record>
+
+        <record id="clients_action" model="ir.actions.act_window">
+            <field name="name">客户</field>
+            <field name="res_model">crm.clients</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="customized_crm.clients_tree"></field>
+            <field name="search_view_id" ref="customized_crm.clients_search"></field>
+        </record>
+
+        <record id="products_action" model="ir.actions.act_window">
+            <field name="name">产品</field>
+            <field name="res_model">crm.products</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+            <field name="view_id" ref="customized_crm.products_tree"></field>
+            <field name="search_view_id" ref="customized_crm.products_search"></field>
+        </record>
+
+        <menuitem name="CRM" id="menu"/>
+        <menuitem name="客户" id="clients_menu" action="clients_action" parent="menu"/>
+        <menuitem name="联系人" id="contacts_menu" action="contacts_action" parent="menu"/>
+        <menuitem name="Pipeline" id="pipeline_menu" action="pipeline_action" parent="menu"/>
+        <menuitem name="产品" id="products_menu" action="products_action" parent="menu"/>
+    </data>
+</odoo>

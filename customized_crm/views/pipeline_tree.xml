@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="pipeline_tree" model="ir.ui.view">
+            <field name="name">pipeline</field>
+            <field name="model">crm.pipeline</field>
+            <field name="arch" type="xml">
+                <tree limit="20" default_order="last_modified_time desc">
+                    <field name="active" invisible="1"/>
+                    <field name="business_name" string="商机名称"/>
+                    <field name="principal_id" string="负责人"/>
+                    <field name="business_process_id" string="商机流程"/>
+                    <field name="stage_id" string="商机阶段"/>
+                    <field name="amount" string="商机金额(元)" sum="Amount"/>
+                    <field name="enduser_name_id" string="最终用户名称"/>
+                    <field name="agent_name_id" string="代理商名称"/>
+                    <field name="expected_sign_date" string="预计签约日期" widget="date"/>
+                    <field name="created_time" string="创建时间"/>
+                    <button name="pipeline_invalid" string="pipeline作废" type="object" class="btn-primary"
+                            attrs="{'invisible': [('active', '!=', True)]}"/>
+                    <button name="pipeline_recover" string="恢复" type="object" class="btn-primary"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pipeline_search" model="ir.ui.view">
+            <field name="name">pipeline</field>
+            <field name="model">crm.pipeline</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="business_name" string="商机名称"/>
+                    <field name="principal_id" string="负责人"/>
+                    <field name="business_process_id" string="商机流程"/>
+                    <field name="stage_id" string="商机阶段"/>
+                    <field name="amount" string="商机金额(元)"/>
+                    <field name="enduser_name_id" string="最终用户名称"/>
+                    <field name="agent_name_id" string="代理商名称"/>
+                    <field name="principal_id" string="负责人"/>
+                    <separator/>
+                    <filter string="创建时间" name="creation_time" date="created_time"/>
+                    <filter string="本季度" name="this_quarter" invisible="1"
+                            domain="[('created_time', '&lt;', (context_today() + relativedelta(months=1)).strftime('%Y-%m-01 00:00:00')),
+                                     ('created_time', '&gt;=', (context_today() - relativedelta(months=2)).strftime('%Y-%m-01 00:00:00'))]"/>
+                    <filter string="本年度" name="this_year" invisible="1"
+                            domain="[('created_time', '&lt;', time.strftime('%Y-12-31')),
+                                     ('created_time', '&gt;=', time.strftime('%Y-01-01'))]"/>
+                    <filter string="本月" name="this_month" invisible="1"
+                            domain="[('expected_sign_date', '&lt;', (context_today() + relativedelta(months=1)).strftime('%Y-%m-01')),
+                                     ('expected_sign_date', '&gt;=', time.strftime('%Y-%m-01'))]"/>
+                    <separator/>
+                    <filter string="赢单" name="Won" domain="[('stage_id', '=', 5)]"/>
+                    <filter string="输单" name="Failed" domain="[('stage_id', '=', 6)]"/>
+                    <filter string="项目中止" name="Suspend" domain="[('stage_id', '=', 7)]"/>
+                    <filter string="进行中" name="Execute" domain="[('stage_id', 'not in', [5,6,7])]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter string="商机阶段" name="Business_Stage" context="{'group_by':'stage_id'}"/>
+                        <separator orientation="vertical"/>
+                        <filter string="创建日期" name="month" context="{'group_by':'created_time:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="pipeline_kanban" model="ir.ui.view">
+            <field name="name">pipeline</field>
+            <field name="model">crm.pipeline</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="stage_id" group_create="false">
+                    <field name="business_name"/>
+                    <field name="principal_id"/>
+                    <field name="enduser_name_id"/>
+                    <field name="amount"/>
+                    <field name="expected_sign_date" widget="date"/>
+                    <field name="created_time"/>
+                    <field name="kanban_state"/>
+                    <progressbar field="kanban_state" colors='{"done": "success", "blocked": "danger"}'
+                                 sum_field="amount"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card" style="height: 150px; width: 300px">
+                                <div class="oe_kanban_content">
+                                    <a type="open">
+                                        <strong>
+                                            <field name="business_name"/>
+                                        </strong>
+                                    </a>
+                                    <div>
+                                        <span>
+                                            负责人： <field name="principal_id"/>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            最终用户名称： <field name="enduser_name_id"/>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            商机金额（元）： <field name="amount"/>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            预计签约日期: <field name="expected_sign_date" widget="date"/>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>
+                                            创建时间: <field name="created_time"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="pipeline_calendar" model="ir.ui.view">
+            <field name="name">pipeline</field>
+            <field name="model">crm.pipeline</field>
+            <field name="arch" type="xml">
+                <calendar date_start="created_time" color="stage_id" event_open_popup="1" mode="month">
+                    <field name="business_name"/>
+                    <field name="principal_id"/>
+                    <field name="enduser_name_id"/>
+                    <field name="amount"/>
+                    <field name="expected_sign_date" widget="date"/>
+                    <field name="created_time"/>
+                </calendar>
+            </field>
+        </record>
+    </data>
+</odoo>

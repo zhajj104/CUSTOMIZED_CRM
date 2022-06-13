@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="clients_tree" model="ir.ui.view">
+            <field name="name">clients</field>
+            <field name="model">crm.clients</field>
+            <field name="arch" type="xml">
+                <tree limit="20" default_order="last_modified_time desc">
+                    <field name="client_name" string="客户名称"/>
+                    <field name="client_type_id" string="客户类型"/>
+                    <field name="channel_type_id" string="渠道类型"/>
+                    <field name="client_level_id" string="客户级别"/>
+                    <field name="client_manager_id" string="客户经理"/>
+                    <field name="union_channel_id" string="联盟渠道"/>
+                    <field name="client_number" string="客户编号"/>
+                    <field name="telephone" string="电话"/>
+                    <field name="province" string="省"/>
+                    <field name="city" string="市"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="clients_search" model="ir.ui.view">
+            <field name="name">clients</field>
+            <field name="model">crm.clients</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="client_name" string="客户名称"/>
+                    <field name="channel_type_id" string="渠道类型"/>
+                    <field name="client_level_id" string="客户级别"/>
+                    <field name="client_manager_id" string="客户经理"/>
+                    <field name="union_channel_id" string="联盟渠道"/>
+                    <field name="client_number" string="客户编号"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>
