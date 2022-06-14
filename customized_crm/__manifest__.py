@@ -3,10 +3,9 @@
     'name': "customized_crm",
     'sequence': 1,
     'category': 'CRM-ODOO应用',
-    'summary': """CUSTOMIZED-CRM""",
+    'summary': """This module will customize a CRM application to adapt to domestic personnel, including four modules: customer, contact, pipeline and product""",
     'description': """本模块将自定义一个CRM应用用来适配国内人员，包含客户、联系人、Pipeline和产品等四个模块""",
     'author': "zhajj",
-    'website': "http://www.yourcompany.com",
     # for the full list
     'version': '0.1',
     # any module necessary for this one to work correctly
